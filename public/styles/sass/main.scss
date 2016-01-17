@@ -1,0 +1,412 @@
+@import "fonts";
+@import "variables";
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+ul {
+    list-style: none;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: HUGEAvantGardeBold, sans-serif;
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+
+    &.mask--active {
+        display: block;
+    }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    margin-top: 0;
+    height: 60px;
+    background-color: $magenta;
+
+    //* Desktop: Navbar
+    @media(min-width:768px) {
+        position: relative;
+        height: 72px;
+    }
+
+    /*!
+     * Navbar Logo
+     */
+    .navbar__logo {
+        width: 50px;
+        height: 60px;
+        margin: 0 24px;
+        background-size: 100%;
+        background-image: url("/images/HUGE-white.png");
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        display: inline-flex;
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        -moz-transition: all 0.2s;
+        -o-transition: all 0.2s;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
+        margin-left: -98px;
+        float: left;
+
+        &.navbar__logo--visible {
+            margin-left: 24px;
+        }
+
+        //* Desktop: Navbar Logo
+        @media(min-width:768px) {
+            margin: 24px 48px 24px 24px;
+            width: 60px;
+            height: 24px;
+        }
+    }
+
+
+    /*!
+     * Navbar Toggle
+     */
+    .navbar__toggle {
+        width: 24px;
+        height: 24px;
+        padding: 18px 24px;
+        z-index: 1000;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        -moz-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+
+        .toggle__bars {
+            width: 24px;
+            height: 4px;
+            margin: 10px 0;
+            background: #fff;
+            -moz-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+            position: relative;
+
+            &:before {
+                content: '';
+                display: block;
+                width: 24px;
+                height: 4px;
+                background: #fff;
+                position: absolute;
+                top: -8px;
+                z-index: -1;
+                -moz-transition: all 0.3s;
+                -o-transition: all 0.3s;
+                -webkit-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+
+            &:after {
+                content: '';
+                display: block;
+                width: 24px;
+                height: 4px;
+                background: #fff;
+                position: absolute;
+                top: 8px;
+                z-index: -1;
+                -moz-transition: all 0.3s;
+                -o-transition: all 0.3s;
+                -webkit-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+        }
+
+        &.close {
+            right: 0;
+
+            .toggle__bars {
+                background: #ec008c;
+                z-index: 0;
+
+                &:before {
+                    transform: rotate(140deg);
+                    top: 0px;
+                }
+
+                &:after {
+                    transform: rotate(40deg);
+                    top: 0px;
+                }
+            }
+        }
+
+        //* Desktop: Navbar Toggle
+        @media(min-width:768px) {
+            display: none;
+        }
+    }
+
+    //* Mobile: Navbar Dropdown
+    @media(max-width:767px) {
+        #navbar__dropdown {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            bottom: 0;
+            right: 72px;
+            background: #fff;
+            overflow: scroll;
+            display: none;
+
+            &.open {
+                display: block;
+            }
+
+            & > ul {
+                margin-top: 12px;
+                padding-bottom: 48px;
+
+                & > li {
+                    display: block;
+
+                    & > a {
+                        color: #000;
+                        text-decoration: none;
+                        padding: 16px 24px;
+                        display: block;
+                        position: relative;
+
+                        &:hover, &:focus {
+                            background-color: rgb(234, 234, 234);
+                        }
+                    }
+                }
+
+                & > li.dropdown {
+
+                    & > a:before {
+                        border-style: solid;
+                        border-width: 0.25em 0.25em 0 0;
+                        border-color: $magenta;
+                        content: '';
+                        display: inline-block;
+                        position: absolute;
+                        top: 14px;
+                        right: 16px;
+                        transform: rotate(-45deg);
+                        vertical-align: top;
+                        height: 12px;
+                        width: 12px;
+                        transform: rotate(135deg);
+                        -moz-transition: transform 0.3s;
+                        -o-transition: transform 0.3s;
+                        -webkit-transition: transform 0.3s;
+                        transition: transform 0.3s;
+                    }
+
+                    &.open > a:before {
+                        transform: rotate(315deg);
+                    }
+
+                    .dropdown__secondary {
+                        font-family: 'Galaxie';
+                        font-size: 16px;
+                        display: none;
+
+                        li {
+                            a {
+                                color: #000;
+                                display: block;
+                                text-decoration: none;
+                                padding: 13px 24px;
+
+                                &:hover, &:focus {
+                                    background: $grey;
+                                    color: $magenta;
+                                }
+                            }
+                        }
+                    }
+
+                    &.open {
+
+                        .dropdown__secondary {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            .copyrights {
+                position: fixed;
+                bottom: 0;
+                z-index: 1;
+                color: #333;
+                font-family: Helvetica, sans-serif;
+                font-size: 12px;
+                margin-left: 24px;
+                padding: 17px 0;
+                background-color: #fff;
+            }
+        }
+    }
+
+    //* Desktop: Navbar Dropdown
+    @media(min-width:768px) {
+        #navbar__dropdown {
+            display: inline-block;
+
+            & > ul {
+                display: inline-block;
+
+                & > li {
+                    float: left;
+
+                    a {
+                        padding: 21px 24px;
+                        display: inline-block;
+                        text-decoration: none;
+                        color: #fff;
+                        font-size: 21px;
+                        line-height: 1.43;
+
+                        &:hover {
+                            background-color: #fff;
+                            color: $magenta;
+                        }
+                    }
+
+                    &.dropdown {
+                        &.open {
+                            a {
+                                background-color: #fff;
+                                color: $magenta;
+                            }
+
+                            .dropdown__secondary {
+                                display: block;
+                            }
+                        }
+
+                        .dropdown__secondary {
+                            font-family: 'Galaxie';
+                            position: absolute;
+                            z-index: 1;
+                            background: #fff;
+                            min-width: 230px;
+                            padding-top: 12px;
+                            padding-bottom: 12px;
+                            display: none;
+
+                            li {
+                                a {
+                                    font-size: 16px;
+                                    color: #000;
+                                    display: block;
+                                    text-decoration: none;
+                                    padding: 13px 24px;
+
+                                    &:hover, &:focus {
+                                        background: $grey;
+                                        color: $magenta;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .copyrights {
+                display: none;
+            }
+        }
+    }
+
+    //* Tablet: Navbar Dropdown
+    @media only screen
+    and (min-width:768px)
+    and (max-width:947px) {
+        #navbar__dropdown > ul > li > a {
+            padding: 27px 24px;
+            font-size: 13px;
+        }
+    }
+}
+
+header {
+    background: url("/images/background-image.jpg");
+    background-size: cover;
+    height: 240px;
+
+    //* Desktop: Navbar Dropdown
+    @media(min-width:768px) {
+        height: 640px;
+    }
+}
+
+.headline {
+    padding: 50px 24px;
+    font-size: 44px;
+    line-height: 48px;
+
+    @media(min-width:768px) {
+        position: absolute;
+        top: 250px;
+        left: 50%;
+        color: #fff;
+        width: 800px;
+        padding: 0;
+        font-size: 120px;
+        line-height: 132px;
+        margin-left: -400px;
+    }
+}
+
+.content {
+    font-family: Galaxie, sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0 24px;
+    margin-top: 0;
+    max-width: 968px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media(min-width:768px) {
+        margin-top: 60px;
+        margin-bottom: 60px;
+        font-size: 24px;
+        line-height: 36px;
+    }
+}
